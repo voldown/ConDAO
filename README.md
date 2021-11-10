@@ -1,4 +1,4 @@
-# ConDAO v0
+# ConDAO v0.1
 
 ## Project Discription
 
@@ -43,7 +43,7 @@ Instead of relying on some sort of traditional property management intermediarie
 ### High Level User Workflow
 
 - Estate developer
-    - registers the whole condo property as an NFT
+    - the one who deploys the contract
     - mints NFT and FTs for each of the units
         - NFT (represents the ownership of the property)
         - FT (used as votes for governance voting)

@@ -1,0 +1,32 @@
+{
+  "name": "blockchain-developer-bootcamp-final-project",
+  "version": "1.0.0",
+  "description": "## Project Discription",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voldown/blockchain-developer-bootcamp-final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/voldown/blockchain-developer-bootcamp-final-project/issues"
+  },
+  "homepage": "https://github.com/voldown/blockchain-developer-bootcamp-final-project#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.2",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "ganache-cli": "^6.12.2",
+    "truffle": "^5.4.17",
+    "web3": "^1.6.0"
+  }
+}
+
+
