@@ -6,6 +6,12 @@ import CondoRegistry from './contracts/CondoRegistry.json';
 import CondoToken from './contracts/CondoToken.json';
 import './App.css';
 
+function createCondoUnitRow(condoUnitId, condoUnitOwner) {
+  return { condoUnitId, condoUnitOwner };
+}
+
+let condoUnitRows = [];
+
 class App extends Component {
 
   componentDidMount = async () => {
@@ -32,17 +38,27 @@ class App extends Component {
         this.setState({ condoRegistry });
         let condoRegistryBalance = await condoRegistry.methods.balanceOf(this.state.account).call();
         let condoRegistryTotalRegistered = await condoRegistry.methods.totalSupply().call();
+        let condoRegistryTotalUnits = await condoRegistry.methods.maxTotalSupply().call();
         let condoRegistryDeveloper = await condoRegistry.methods.owner().call()
         let condoRegistryUnitOwners = {};
-        for (let i=1; i<=parseInt(condoRegistryTotalRegistered); i++) {
-          let condoRegistryUnitOwner = await condoRegistry.methods.ownerOf(i).call();
-          condoRegistryUnitOwners[i] = condoRegistryUnitOwner.toString();
+        if (condoRegistryTotalRegistered) {
+          for (let i=0; i<parseInt(condoRegistryTotalRegistered); i++) {
+            let condoRegistryTokenIdRegistered = await condoRegistry.methods.tokenByIndex(i).call();
+            let condoRegistryUnitOwner = await condoRegistry.methods.ownerOf(condoRegistryTokenIdRegistered).call();
+            condoRegistryUnitOwners[condoRegistryTokenIdRegistered] = condoRegistryUnitOwner.toString();
+          }
+        }
+        // let condoUnitRows = [];
+        for (let i=1; i<=condoRegistryTotalUnits; i++) {
+          condoUnitRows.push(createCondoUnitRow(i, condoRegistryUnitOwners[i]));
         }
         this.setState({ 
           condoRegistryBalance: condoRegistryBalance.toString(),
           condoRegistryTotalRegistered: condoRegistryTotalRegistered.toString(),
           condoRegistryDeveloper: condoRegistryDeveloper.toString(),
-          condoRegistryUnitOwners: condoRegistryUnitOwners
+          condoRegistryTotalUnits: condoRegistryTotalUnits.toString(),
+          condoRegistryUnitOwners: condoRegistryUnitOwners,
+          condoUnitRows: condoUnitRows,
         });
       } else {
       window.alert('CondoRegistry contract has not been deployed to the detected network.');
@@ -74,36 +90,47 @@ class App extends Component {
   }
 
   // mint NFT 
-  mintNFT = (address, tokenURI) => {
+  mintNFT = async (address, tokenId, tokenURI) => {
     this.setState({ loading: true });
-    this.state.condoRegistry.methods.safeMint(address, tokenURI)
+    await this.state.condoRegistry.methods.safeMint(address, tokenId, tokenURI)
       .send({ from: this.state.account })
-        .on('transactionHash', (hash) => {
-          this.setState({ loading: false })
+        .on('transactionHash', (txHash) => {
+          console.log(txHash);
         })
+          .on('receipt', (receipt) => {
+            this.setState({ loading: false });
+            window.location.reload(true);
+          })
   }
 
   // transfer NFT
-  transferNFT = (addressFrom, addressTo, tokenId) => {
+  transferNFT = async (addressFrom, addressTo, tokenId) => {
     this.setState({ loading: true });
-    this.state.condoRegistry.methods.safeTransferFrom(this.state.account, addressTo, tokenId)
+    await this.state.condoRegistry.methods.safeTransferFrom(this.state.account, addressTo, tokenId)
       .send({ from: this.state.account })
-        .on('transactionHash', (hash) => {
-          this.setState({ loading: false})
+        .on('transactionHash', (txHash) => {
+          console.log(txHash);
         })
+          .on('receipt', (receipt) => {
+            this.setState({ loading: false });
+            window.location.reload(true);
+          })
   }
 
 
   // transfer CDT
-  transferCDT = (address, amount) => {
+  transferCDT = async (address, amount) => {
     this.setState({ loading: true });
-    this.state.condoToken.methods.transfer(address, amount)
+    await this.state.condoToken.methods.transfer(address, amount)
       .send({ from: this.state.account })
-        .on('transactionHash', (hash) => {
-          this.setState({ loading: false })
+        .on('transactionHash', (txHash) => {
+          console.log(txHash)
         })
+          .on('receipt', (receipt) => {
+            this.setState({ loading: false });
+            window.location.reload(true);
+          })
   }
-
 
   constructor(props) {
     super(props)
@@ -115,6 +142,7 @@ class App extends Component {
       condoRegistryBalance: '0',
       condoTokenBalance: '0',
       condoRegistryTotalRegistered: '0',
+      condoRegistryTotalUnits: '0',
       condoRegistryDeveloper: '0x0',
       condoRegistryUnitOwners: {},
       loading: true
@@ -131,8 +159,10 @@ class App extends Component {
         condoRegistryBalance={this.state.condoRegistryBalance}
         condoTokenBalance={this.state.condoTokenBalance}
         condoRegistryTotalRegistered={this.state.condoRegistryTotalRegistered}
+        condoRegistryTotalUnits={this.state.condoRegistryTotalUnits}
         condoRegistryDeveloper={this.state.condoRegistryDeveloper}
         condoRegistryUnitOwners={this.state.condoRegistryUnitOwners}
+        condoUnitRows = {this.state.condoUnitRows}
         mintNFT={this.mintNFT}
         transferNFT={this.transferNFT}
         transferCDT={this.transferCDT}
@@ -140,8 +170,7 @@ class App extends Component {
     }
 
     return (
-      <div>
-        <Box sx={{ flexGrow: 1, bgColor: 'primary.main' }}>
+        <Box sx={{ maxWidth:"lg", flexGrow: 1, bgColor: 'primary.main' }}>
           <AppBar position="static">
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -152,13 +181,10 @@ class App extends Component {
               </Typography>
             </Toolbar>
           </AppBar>
-        </Box>
-        <Container maxWidth="sm">
           <main>
             { content }
           </main>
-        </Container> 
-      </div>
+        </Box>
     );
   }
 }

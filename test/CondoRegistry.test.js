@@ -14,11 +14,11 @@ contract('CondoRegistry', ([developer, unit1_owner, new_unit1_owner]) => {
 
     before(async () => {
     // load Contracts (CondoRegistry.sol and CondoToken.sol)
-        condoRegistry = await CondoRegistry.new();
-        condoToken = await CondoToken.new();
+        condoRegistry = await CondoRegistry.new("4");
+        condoToken = await CondoToken.new("1000");
 
     // mint a condo_unit NFT to a condo_unit_owner
-        await condoRegistry.safeMint(unit1_owner, 'ipfs://QmV9y7NeumwkRJw2zK2NtUAAqU8qTPqH8nySnJ56qF7ZCn');
+        await condoRegistry.safeMint(unit1_owner, '1', 'ipfs://QmV9y7NeumwkRJw2zK2NtUAAqU8qTPqH8nySnJ56qF7ZCn');
     })
 
     // check Condo Registry Deployment
@@ -31,6 +31,17 @@ contract('CondoRegistry', ([developer, unit1_owner, new_unit1_owner]) => {
         it('contract has a symbol', async () => {
             const symbol = await condoRegistry.symbol();
             assert.equal(symbol, 'CONDO');
+        })
+
+        it('contract has a totalSupply of 1', async () => {
+            const totalSupply = await condoRegistry.totalSupply();
+            assert.equal(totalSupply, '1');
+        })
+
+
+        it('contract has a maxTotalSupply of 4', async () => {
+            const maxTotalSupply = await condoRegistry.maxTotalSupply();
+            assert.equal(maxTotalSupply, '4');
         })
     })
 
@@ -45,7 +56,6 @@ contract('CondoRegistry', ([developer, unit1_owner, new_unit1_owner]) => {
             const symbol = await condoToken.symbol();
             assert.equal(symbol, 'CDT');
         })
-
     })
 
     // check if CDT has been preminted to condo_whole_developer when the contract was deployed

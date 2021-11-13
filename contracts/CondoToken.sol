@@ -9,9 +9,9 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 /// @notice Condo Token(CDT) used as votes for governance voting
 /// @dev Currently hardcoded total supply will be customizable in the future development build
 contract CondoToken is ERC20, ERC20Permit, ERC20Votes {
-    constructor() ERC20("CondoToken", "CDT") ERC20Permit("CondoToken") {
+    constructor(uint256 maxTotalSupply) ERC20("CondoToken", "CDT") ERC20Permit("CondoToken") {
         // premint tokens with a cappedSupply to estateDeveloper
-        _mint(msg.sender, 1000 * 10 ** decimals());
+        _mint(msg.sender, maxTotalSupply * 10 ** decimals());
     }
     
     // The following functions are overrides required by Solidity.
