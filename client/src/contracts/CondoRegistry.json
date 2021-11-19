@@ -22167,10 +22167,28 @@
       "links": {},
       "address": "0x5E409137680Eb1156C3788578dFF43093a801eeC",
       "transactionHash": "0x43712978dcac075e740a455f8404dbc4b3560584ceb130dee50fd38328bbe891"
+    },
+    "1636823220687": {
+      "events": {},
+      "links": {},
+      "address": "0x592722E5D3aeA2d900f1F54506475fD5047a12e8",
+      "transactionHash": "0xb80ca64914bebe85dcbc5ebd689158d80b96e7fb0c8da83f1ee3b7d6177bd35a"
+    },
+    "1637172551674": {
+      "events": {},
+      "links": {},
+      "address": "0x6efB5A24b15293AF2875c2cb93cA27324Fa1B86d",
+      "transactionHash": "0x4c65abc4073568a61e1be705e6ab1727c4316096f1746197d08dfe67751b0f40"
+    },
+    "1637245028864": {
+      "events": {},
+      "links": {},
+      "address": "0xed9025F2C15B5c09c72A95C2b1050a3F0d3fA2EE",
+      "transactionHash": "0xcec0d1f8f274edfc69a0297b76108ff0bf0b762c62b49da2e237e932243e2e28"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-12T15:27:48.390Z",
+  "updatedAt": "2021-11-18T14:50:08.748Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "Only the estate developer is able to mint NFTs; homeowners can only transfer",

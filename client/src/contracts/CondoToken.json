@@ -24662,10 +24662,28 @@
       "links": {},
       "address": "0x4163fC82f85Bcd375595b8012DEbA9d8b8Ca033F",
       "transactionHash": "0xa4eeadfd82875e859dc685e3094d87afffaac088e35cf926f1af17f985f21ace"
+    },
+    "1636823220687": {
+      "events": {},
+      "links": {},
+      "address": "0xf718fB04B89488Ac8855A2b1890EBE8Ac56FAa82",
+      "transactionHash": "0xf14110df3c3eb57c418041d599b46438715d0a2161755e8e961e59ad45ff91bd"
+    },
+    "1637172551674": {
+      "events": {},
+      "links": {},
+      "address": "0x3971cd48ee3076792EBF940f68670415550F045B",
+      "transactionHash": "0xee8c072d72e2addc6eba39541f0a35da736d903ed89dbacc88b9e8ee373aa7cd"
+    },
+    "1637245028864": {
+      "events": {},
+      "links": {},
+      "address": "0x53909aDCE52B197CcB906Dd56F4a3D85F68BE469",
+      "transactionHash": "0x4a561ace74e9cea0b8665519d4b10e84e532c40a34d9d05d95cc27ca7ec64da1"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-12T15:27:48.404Z",
+  "updatedAt": "2021-11-18T14:50:08.759Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "Currently hardcoded total supply will be customizable in the future development build",

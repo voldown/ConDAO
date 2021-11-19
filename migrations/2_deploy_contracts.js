@@ -12,7 +12,7 @@ module.exports = async function(deployer, network, accounts) {
   const condoToken = await CondoToken.deployed();
 
   // deploy CondoGovernor contract with CondoToken as ERC20Votes
-  await deployer.deploy(CondoGovernor, condoToken.address);
+  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address);
   const condoGovernor = await CondoGovernor.deployed();
 };
 
