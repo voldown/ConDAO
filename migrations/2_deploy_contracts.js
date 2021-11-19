@@ -14,10 +14,7 @@ module.exports = async function(deployer, network, accounts) {
   // deploy CondoGovernor contract with CondoToken as ERC20Votes
   // go to https://wizard.openzeppelin.com/#governor for configuration of time in blocks
   // votingDelay: 1 block 
-  // votingPeriod: 273 block == 1 hour
-  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 1, 273 );
+  // votingPeriod: 45 block == 10 minutes (short votingPeriod for demostration purpose)
+  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 1, 45);
   const condoGovernor = await CondoGovernor.deployed();
 };
-
-
-
