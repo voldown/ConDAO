@@ -10,6 +10,8 @@ import "./CondoTreasury.sol";
 
 contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction {
 
+    uint256 private _votingDelay;    
+    uint256 private _votingPeriod;    
     CondoRegistry public condoRegistry;
     CondoTreasury public condoTreasury;
 
@@ -21,7 +23,7 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
         _;
     }
 
-    constructor(ERC20Votes _token, CondoRegistry _condoRegistry)
+    constructor(ERC20Votes _token, CondoRegistry _condoRegistry, uint256 votingDelay_, uint256 votingPeriod_)
         Governor("CondoGovernor")
         GovernorVotes(_token)
         GovernorVotesQuorumFraction(66)
@@ -29,6 +31,8 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
         condoRegistry = _condoRegistry;
         condoTreasury = new CondoTreasury("CondoTreasury");
         emit CreatedCondoTreasury(address(condoTreasury));
+        _votingDelay = votingDelay_;
+        _votingPeriod = votingPeriod_;
     }
 
     function treasury() public view returns (address) {
@@ -44,13 +48,13 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
     }
 
     /// @dev go to https://wizard.openzeppelin.com/#governor for configuration of time in blocks
-    function votingDelay() public pure override returns (uint256) {
-        return 1; // 1 block
+    function votingDelay() public view override(IGovernor) returns (uint256) {
+        return _votingDelay; 
     }
 
     /// @dev go to https://wizard.openzeppelin.com/#governor for configuration of time in blocks
-    function votingPeriod() public pure override returns (uint256) {
-        return 273; // 273 block == 1 hour
+    function votingPeriod() public view override(IGovernor) returns (uint256) {
+        return _votingPeriod;
     }
 
     // overriding with modifier votingValidity()

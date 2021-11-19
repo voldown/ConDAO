@@ -22,10 +22,10 @@ contract CondoTreasury is Ownable {
         return address(this).balance;
     }
 
-    function sendEther(address payable _to) public payable onlyOwner {
-        (bool sent, ) = _to.call{value: msg.value}("");
+    function sendEther(address payable _to, uint256 _value) public payable onlyOwner {
+        (bool sent, ) = _to.call{value: _value}("");
         require(sent, "Failed to send Ether");
-        emit SentEther(_to, msg.value);
+        emit SentEther(_to, _value);
     }
 
     receive() external payable {
