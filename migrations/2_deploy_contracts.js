@@ -13,8 +13,14 @@ module.exports = async function(deployer, network, accounts) {
 
   // deploy CondoGovernor contract with CondoToken as ERC20Votes
   // go to https://wizard.openzeppelin.com/#governor for configuration of time in blocks
-  // votingDelay: 1 block 
-  // votingPeriod: 45 block == 10 minutes (short votingPeriod for demostration purpose)
-  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 1, 45);
+  /* public testnet voting params configuration
+     votingDelay: 1 block == 13.2 seconds
+     votingPeriod: 45 block == 10 minutes
+  */
+  /* local ganache-cli voting params configuration
+     votingDelay: 0 block 
+     votingPeriod: 3 block
+  */
+  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 0, 3);
   const condoGovernor = await CondoGovernor.deployed();
 };

@@ -18,6 +18,7 @@
 ### Frontend Deployment
 - `cd client`
 - under the `/client` folder run `yarn install`
+- create `.env` under the `/client` folder and paste in `SKIP_PREFLIGHT_CHECK=true`
 - and `yarn start`
 - open `http://localhost:3000`
 
@@ -67,12 +68,13 @@ Homeowners together share the responsibility of taking care of the condo as a co
     1. receives the NFT and `CDT`s from estate developer
     2. submits a proposal
     3. votes for a proposal
+    4. executes a proposal
 
 ### Tech Stack and Toolings
 
 - smart contract development based on OpenZeppelin ERC-20, ERC-721 and Governor contract
 - using truffle framework for smart contract development and testing
-- using web3.js for interacti
+- using web3.js for smart contract interaction
 - storing NFT data via Pinata / IPFS
 
 ---
