@@ -19,8 +19,8 @@ module.exports = async function(deployer, network, accounts) {
   */
   /* local ganache-cli voting params configuration
      votingDelay: 0 block 
-     votingPeriod: 3 block
+     votingPeriod: 4 block
   */
-  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 0, 3);
+  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 0, 4);
   const condoGovernor = await CondoGovernor.deployed();
 };
