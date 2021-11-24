@@ -7,10 +7,10 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 /// @title Condo Token(CDT) Contract 
 /// @notice Condo Token(CDT) used as votes for governance voting
-/// @dev Currently hardcoded total supply will be customizable in the future development build
 contract CondoToken is ERC20, ERC20Permit, ERC20Votes {
+    /// @dev premint maximum amount of tokens to estate developer
+    /// @param maxTotalSupply maximum supply has to be specified when contract is deployed
     constructor(uint256 maxTotalSupply) ERC20("CondoToken", "CDT") ERC20Permit("CondoToken") {
-        // premint tokens with a cappedSupply to estateDeveloper
         _mint(msg.sender, maxTotalSupply * 10 ** decimals());
     }
     

@@ -8,6 +8,8 @@ import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFractio
 import "./CondoRegistry.sol";
 import "./CondoTreasury.sol";
 
+/// @title Condo Governor Contract
+/// @notice homeowners can interact with the contract to make proposals, cast votes and execute proposals 
 contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction {
 
     uint256 private _votingDelay;    
@@ -17,12 +19,17 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
 
     event CreatedCondoTreasury(address indexed condoTreasury);
 
-    // check if the propose/vote address has the NFT 
+    /// @dev only homeowners with a CONDO NFT will be able to propose, vote, and execute
     modifier votingValidity() {
         require(condoRegistry.balanceOf(tx.origin)>0, "only condo unit owners can propose/vote for governance");
         _;
     }
 
+    /// @dev CondoTreasury contract instance is created when contract is deployed 
+    /// @param _token ERC20 token as votes
+    /// @param _condoRegistry condoRegistry contract
+    /// @param votingDelay_ delay, in number of block, between the proposal is created and the vote starts
+    /// @param votingPeriod_ delay, in number of blocks, between the vote start and vote ends
     constructor(ERC20Votes _token, CondoRegistry _condoRegistry, uint256 votingDelay_, uint256 votingPeriod_)
         Governor("CondoGovernor")
         GovernorVotes(_token)
@@ -35,14 +42,17 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
         _votingPeriod = votingPeriod_;
     }
 
+    /// @return condoTreasury contract address
     function treasury() public view returns (address) {
         return address(condoTreasury);
     }
 
+    /// @return condoTreasury contract name
     function treasuryName() public view returns (string memory) {
         return condoTreasury.name();
     }
 
+    /// @return condoTreasury contract ETH balance
     function treasuryBalance() public view returns (uint256) {
         return condoTreasury.getBalance();
     }
@@ -57,7 +67,11 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
         return _votingPeriod;
     }
 
-    // overriding with modifier votingValidity()
+    /// @param targets target contract address to call
+    /// @param values ETH value sent along
+    /// @param calldatas calldata of function call
+    /// @param description proposal description
+    /// @dev overriding with modifier votingValidity()
     function propose(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, string memory description)
         public
         override(Governor)
@@ -67,7 +81,9 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
         return super.propose(targets, values, calldatas, description);
     }
 
-    // overriding with modifier votingValidity()
+    /// @param proposalId proposal ID
+    /// @param support vote options: 0 = against, 1 = for, 2 = abstain
+    /// @dev overriding with modifier votingValidity()
     function castVote(uint256 proposalId, uint8 support)
         public
         override(Governor)
@@ -77,7 +93,9 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
         return super.castVote(proposalId, support);
     }
 
-    // overriding with modifier votingValidity()
+    /// @param proposalId proposal ID
+    /// @param support vote options: 0 = against, 1 = for, 2 = abstain
+    /// @dev overriding with modifier votingValidity()
     function castVoteWithReason(uint256 proposalId, uint8 support, string calldata reason)
         public
         override(Governor)
@@ -87,7 +105,9 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
         return super.castVoteWithReason(proposalId, support, reason);
     }
 
-    // overriding with modifier votingValidity()
+    /// @param proposalId proposal ID
+    /// @param support vote options: 0 = against, 1 = for, 2 = abstain
+    /// @dev overriding with modifier votingValidity()
     function castVoteBySig(uint256 proposalId, uint8 support, uint8 v, bytes32 r, bytes32 s)
         public
         override(Governor)
@@ -97,7 +117,11 @@ contract CondoGovernor is Governor, GovernorCountingSimple, GovernorVotes, Gover
         return super.castVoteBySig(proposalId, support, v, r, s);
     }
 
-    // overriding with modifier votingValidity() 
+    /// @param targets targeted contract address to call
+    /// @param values ETH value sent along
+    /// @param calldatas calldata of function call
+    /// @param descriptionHash keccak256 hash form of description
+    /// @dev overriding with modifier votingValidity() 
     function execute(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
         public
         payable

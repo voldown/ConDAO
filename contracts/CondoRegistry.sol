@@ -7,22 +7,22 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title Condo Registry Contract 
-/// @notice Condo units being registered as NFTs, which can later be transferred to homeowners
-/// @dev Only the estate developer is able to mint NFTs; homeowners can only transfer
+/// @notice condo units being registered as NFTs, which can later be transferred to homeowners
+/// @dev only condo estate developer (contract owner) will be able to mint NFTs; homeowners can only transfer
 contract CondoRegistry is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     uint256 immutable maxSupply;
 
     event MintedNFT(uint256 indexed tokenId, string tokenURI);
 
-    /// @dev _tokenIdCounter starts from 1, which naturally corresponds to the real-world condo unit #1
+    /// @param _maxSupply maximum supply of NFTs has to be specified when contract is deployed
     constructor(uint256 _maxSupply) ERC721("CondoRegistry", "CONDO") {
         maxSupply = _maxSupply;    
     }
 
-    /// @dev With this function, owner can only mint maxSupply amount NFTs, since there is only limited units in our condo for simplicity
-    /// @param _tokenURI The token URI of the condo_unit metadata
-    /// @return tokenId The tokenID of the corresponding assets
+    /// @dev with this function, contract owner can mint no more than maxSupply amount of NFTs
+    /// @param _tokenURI token URI of the condo_unit metadata
+    /// @return tokenId token ID of the corresponding assets
     function safeMint(address to, uint256 tokenId, string memory _tokenURI) public onlyOwner returns (uint256) {
         require((tokenId > 0 && tokenId <= maxSupply), "Minting NFTs more than maxSupply is not allowed.");
         _safeMint(to, tokenId);
@@ -32,6 +32,7 @@ contract CondoRegistry is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return tokenId;
     }
 
+    /// @return maxSupply maximum supply of NFTs
     function maxTotalSupply()
         public
         view
