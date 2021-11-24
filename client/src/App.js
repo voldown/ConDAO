@@ -153,7 +153,7 @@ class App extends Component {
           window.alert(`Transaction Hash: ${txHash}`);
         })
         .on('receipt', (receipt) => {
-          window.alert('CONDO NFT Minted Successfully!')
+          window.alert(`CONDO NFT Minted Successfully!\nTransaction Hash: ${receipt.transactionHash}`);
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -168,7 +168,7 @@ class App extends Component {
           window.alert(`Transaction Hash: ${txHash}`);
         })
         .on('receipt', (receipt) => {
-          window.alert('CONDO NFT transferred Successfully!')
+          window.alert(`CONDO NFT transferred Successfully!\nTransaction Hash: ${receipt.transactionHash}`)
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -183,7 +183,7 @@ class App extends Component {
           window.alert(`Transaction Hash: ${txHash}`);
         })
         .on('receipt', (receipt) => {
-          window.alert('CDTs transferred Successfully!')
+          window.alert(`CDTs transferred Successfully!\nTransaction Hash: ${receipt.transactionHash}`)
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -198,7 +198,7 @@ class App extends Component {
           window.alert(`Transaction Hash: ${txHash}`);
         })
         .on('receipt', (receipt) => {
-          window.alert('CDTs delegated Successfully!')
+          window.alert(`CDTs delegated Successfully!\nTransaction Hash: ${receipt.transactionHash}`)
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -214,10 +214,43 @@ class App extends Component {
         })
         .on('receipt', (receipt) => {
           let proposalId = receipt.events.ProposalCreated.returnValues['0'];
-          window.alert(`Proposal Submitted Successfully! The Proposal ID is ${proposalId}`);
+          console.log(proposalId);
+          window.alert(`Proposal Submitted Successfully!\nProposal ID: ${proposalId}\nTransaction Hash: ${receipt.transactionHash}`);
           this.setState({ loading: false });
           window.location.reload(true);
         })
+  }
+
+  // view proposal state
+  proposalState = async (proposalId) => {
+    this.setState({ loading: true });
+    await this.state.condoGovernor.methods.state(proposalId)
+      .call()
+        .then((proposalStateNum) => {
+          let proposalStateText;
+          if (proposalStateNum === '0') {
+            proposalStateText = 'PENDING'
+          } else if (proposalStateNum === '1') {
+            proposalStateText = 'ACTIVE'
+          } else if (proposalStateNum === '2') {
+            proposalStateText = 'CANCELED'
+          } else if (proposalStateNum === '3') {
+            proposalStateText = 'DEFEATED'
+          } else if (proposalStateNum === '4') {
+            proposalStateText = 'SUCCEEDED'
+          } else if (proposalStateNum === '5') {
+            proposalStateText = 'QUEUED'
+          } else if (proposalStateNum === '6') {
+            proposalStateText = 'EXPIRED'
+          } else if (proposalStateNum === '7') {
+            proposalStateText = 'EXECUTED'
+          } else {
+            proposalStateText = 'NULL'
+          }
+          window.alert(`The Proposal is Currently ${proposalStateText}`);
+          this.setState({ loading: false });
+          window.location.reload(true);
+        })  
   }
 
   // cast vote 
@@ -232,19 +265,36 @@ class App extends Component {
           let proposalId = receipt.events.VoteCast.returnValues['1'];
           let support = receipt.events.VoteCast.returnValues['2'];
           let supportLabel;
-          if (support === 1) {
+          if (support === '1') {
             supportLabel = 'FOR';
-          } else if (support === 0) {
+          } else if (support === '0') {
             supportLabel = 'AGAINST';
-          } else if (support === 2) {
+          } else if (support === '2') {
             supportLabel = 'ABSTAIN';
           } else {
             supportLabel = 'NULL';
           }
-          window.alert(`Your ${supportLabel} Vote Cast Successfully for Proposal ID: ${proposalId} `);
+          window.alert(`Your ${supportLabel} Vote Cast Successfully for Proposal ID: ${proposalId}\nTransaction Hash: ${receipt.transactionHash}`);
           this.setState({ loading: false });
           window.location.reload(true);
         })
+  }
+
+  // execute
+  execute = async (address, value, calldata, descriptionHash) => {
+    this.setState({ loading: true });
+    await this.state.condoGovernor.methods.execute(address, value, calldata, descriptionHash)
+      .send({ from: this.state.account })
+        .on('transactionHash', (txHash) => {
+          window.alert(`Transaction Hash: ${txHash}`);
+        })
+        .on('receipt', (receipt) => {
+          let proposalId = receipt.events.ProposalExecuted.returnValues['0'];
+          console.log(proposalId);
+          window.alert(`Proposal Executed Successfully!\nProposal ID: ${proposalId}\nTransaction Hash: ${receipt.transactionHash}`);
+          this.setState({ loading: false });
+          window.location.reload(true);
+        })    
   }
 
   render() {
@@ -274,12 +324,14 @@ class App extends Component {
         delegateCDT={this.delegateCDT}
         propose={this.propose}
         castVote={this.castVote}
+        proposalState={this.proposalState}
+        execute={this.execute}
       />
     }
 
     return (
-        <Box sx={{ maxWidth:"lg", flexGrow: 1, bgColor: 'primary.main' }}>
-          <AppBar position="static">
+        <Box sx={{ width: "100%", flexGrow: 1, bgColor: 'primary.main' }}>
+          <AppBar position="static" sx={{ mb: 10 }}>
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 ConDAO

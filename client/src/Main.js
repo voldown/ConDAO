@@ -30,8 +30,8 @@ class Main extends Component {
   render() {
 
     return (
-      <Box sx={{ flexGrow: 1, bgColor: 'primary.main' }}>
-        <Container sx={{ flexGrow: 1, maxWidth: "md", margin: [10, 10, 10, 10], }}>
+      <Box sx={{ width: "100%", margin: 'auto', justifyContent: 'center', bgColor: 'primary.main' }}>
+        <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 'auto', }}>
           <Grid container spacing={0}>
             <Grid item xs={12}>
               <Item>
@@ -44,7 +44,7 @@ class Main extends Component {
           </Grid>
         </Container>
 
-        <Container sx={{ maxWidth:"md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -70,7 +70,7 @@ class Main extends Component {
         </Container>
 
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -96,13 +96,13 @@ class Main extends Component {
           </TableContainer>
         </Container>
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h1>Property Tokenization</h1>
           <h4>Workflow for Condo estate developer: Mint CONDO NFT >> Transfer CDTs</h4>
           <h4>Workflow for Condo unit owners: Transfer CONDO NFT >> Transfer CDTs</h4>
         </Container>
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Mint CONDO NFT</h2>
           <h5>Condo unit NFTs can only be minted by condo estate developer</h5>
           <form onSubmit= {(event) => {
@@ -140,7 +140,7 @@ class Main extends Component {
           </form>
         </Container>
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Transfer CONDO NFT</h2>
           <h5>Condo units are represented by corresponding tokenId</h5>
           <h5>(Condo Unit #1 => Token ID: 1)</h5>
@@ -179,7 +179,7 @@ class Main extends Component {
           </form>
         </Container>
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Transfer CDTs</h2>
           <h5>CDTs are governance token used for voting</h5>
           <form onSubmit={(event) => {
@@ -217,16 +217,16 @@ class Main extends Component {
           </form>
         </Container>
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h1>Governance Voting</h1>
           <h4>Workflow for all condo unit owners: Delegate CDT >> Check Your Votes</h4>
-          <h4>Workflow for proposal making: Make a Proposal</h4>
-          <h4>Workflow for proposal voting: Cast a Vote</h4>
-          <h4>Voting Delay: {this.props.votingDelay} Block (≈{this.props.votingDelay*13.2}s)</h4>
-          <h4>Voting Period: {this.props.votingPeriod} Block (≈{this.props.votingPeriod*13.2}s)</h4>
+          <h4>Workflow for proposal making: Make a Proposal >> View Proposal State >> Execute a Proposal</h4>
+          <h4>Workflow for proposal voting: View Proposal State >> Cast a Vote</h4>
+          <h4>Voting Delay: {this.props.votingDelay} Block </h4>
+          <h4>Voting Period: {this.props.votingPeriod} Block </h4>
         </Container>
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Delegate CDT</h2>
           <h5>Delegate CDTs to yourself before voting to gain voting power extracted from your CDTs</h5>
           <h5>Delegated Address: {this.props.condoTokenDelegates}</h5>
@@ -242,12 +242,12 @@ class Main extends Component {
           </form>
         </Container>
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Check Your Votes</h2>
           <h5>Your Votes: {this.props.web3.utils.fromWei(this.props.condoTokenGetVotes, 'Ether')} CDTs</h5>
         </Container>
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Make a Proposal</h2>
           <form onSubmit={(event) => {
             event.preventDefault();
@@ -265,8 +265,8 @@ class Main extends Component {
                   "name": "_value",
                   "type": "uint256"
                 }]
-            }, [this.sendEthToAddress.value.toString(), this.props.web3.utils.toWei(this.sendEthToValue.value,'Ether')])];
-            let description = this.proposalDescription.value.toString();
+            }, [this.proposeSendEthToAddress.value.toString(), this.props.web3.utils.toWei(this.proposeSendEthToValue.value,'Ether')])];
+            let description = this.proposeProposalDescription.value.toString();
             this.props.propose(address, value, calldata, description);
           }}>
             <TextField
@@ -278,7 +278,7 @@ class Main extends Component {
               rows={3}
               defaultValue="Proposal #0: describe the reason why you would start this proposal..."
               variant="standard"
-              inputRef={(input) => { this.proposalDescription = input }}
+              inputRef={(input) => { this.proposeProposalDescription = input }}
             />
             <TextField
               sx = {{ padding: [1, 1, 1, 1] }}
@@ -288,7 +288,7 @@ class Main extends Component {
               label="Address"
               defaultValue="0x"
               variant="standard"
-              inputRef={(input) => { this.sendEthToAddress = input }}
+              inputRef={(input) => { this.proposeSendEthToAddress = input }}
             />
             <TextField
               sx = {{ padding: [1, 1, 1, 1] }}
@@ -297,17 +297,42 @@ class Main extends Component {
               label="Value (ETH)"
               defaultValue="0"
               variant="standard"
-              inputRef={(input) => { this.sendEthToValue = input }}
+              inputRef={(input) => { this.proposeSendEthToValue = input }}
             />
             <Button 
               sx = {{ margin: [2, 2, 2, 2], padding: [1, 1, 1, 1] }}
               variant="outlined"
               type="submit"
-            >Submit</Button>
+            >Propose</Button>
           </form>
         </Container>
 
-        <Container sx={{ maxWidth: "md", margin: [10, 10, 10, 10], }}>
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
+          <h2>View Proposal State</h2>
+          <form onSubmit={(event) => {
+            event.preventDefault();
+            let viewStateProposalId = this.viewStateProposalId.value.toString();
+            this.props.proposalState(viewStateProposalId);
+          }}>
+            <TextField
+              sx = {{ padding: [1, 1, 1, 1] }}
+              fullWidth
+              required
+              id="filled-required"
+              label="Proposal ID"
+              defaultValue="0"
+              variant="standard"
+              inputRef={(input) => { this.viewStateProposalId = input }}
+            />
+            <Button 
+              sx = {{ margin: [0, 2, 0, 2], padding: [1, 1, 1, 1] }}
+              variant="outlined"
+              type="submit"
+            >View</Button>
+          </form>
+        </Container>
+
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Cast a Vote</h2>
           <form onSubmit={(event) => {
             event.preventDefault();
@@ -345,9 +370,70 @@ class Main extends Component {
               sx = {{ margin: [2, 2, 2, 2], padding: [1, 1, 1, 1] }}
               variant="outlined"
               type="submit"
-            >Submit</Button>
+            >Vote</Button>
           </form>
         </Container>
+
+        <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
+          <h2>Execute a Proposal</h2>
+          <form onSubmit={(event) => {
+            event.preventDefault();
+            let address = [this.props.treasuryAddress];
+            let value = [0];
+            let calldata = [this.props.web3.eth.abi.encodeFunctionCall({
+                name: 'sendEther',
+                type: 'function',
+                inputs: [{
+                    "internalType": "address payable",
+                    "name": "_to",
+                    "type": "address"
+                },{
+                  "internalType": "uint256",
+                  "name": "_value",
+                  "type": "uint256"
+                }]
+            }, [this.executeSendEthToAddress.value.toString(), this.props.web3.utils.toWei(this.executeSendEthToValue.value,'Ether')])];
+            let descriptionHash = this.props.web3.utils.keccak256(this.executeProposalDescription.value.toString());
+            this.props.execute(address, value, calldata, descriptionHash);
+          }}>
+            <TextField
+              sx = {{ padding: [1, 1, 1, 1] }}
+              fullWidth
+              required
+              id="outlined-multiline-static filled-required"
+              label="Proposal Description"
+              rows={3}
+              defaultValue="Proposal #0: describe the reason why you would start this proposal..."
+              variant="standard"
+              inputRef={(input) => { this.executeProposalDescription = input }}
+            />
+            <TextField
+              sx = {{ padding: [1, 1, 1, 1] }}
+              fullWidth
+              required
+              id="filled-required"
+              label="Address"
+              defaultValue="0x"
+              variant="standard"
+              inputRef={(input) => { this.executeSendEthToAddress = input }}
+            />
+            <TextField
+              sx = {{ padding: [1, 1, 1, 1] }}
+              required
+              id="filled-required"
+              label="Value (ETH)"
+              defaultValue="0"
+              variant="standard"
+              inputRef={(input) => { this.executeSendEthToValue = input }}
+            />
+            <Button 
+              sx = {{ margin: [2, 2, 2, 2], padding: [1, 1, 1, 1] }}
+              variant="outlined"
+              type="submit"
+            >Propose</Button>
+          </form>
+        </Container>
+
       </Box>
     )
   }
