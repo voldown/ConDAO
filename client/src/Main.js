@@ -97,14 +97,14 @@ class Main extends Component {
         </Container>
 
         <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
-          <h1>Property Tokenization</h1>
-          <h4>Workflow for Condo estate developer: Mint CONDO NFT >> Transfer CDTs</h4>
-          <h4>Workflow for Condo unit owners: Transfer CONDO NFT >> Transfer CDTs</h4>
+          <h1>Property Ownership / Token Transfer</h1>
+          <h4>Workflow for Condo estate developer: Mint CONDO NFT >> Transfer CDT</h4>
+          <h4>Workflow for Condo unit owners (optional): Transfer CONDO NFT >> Transfer CDT</h4>
         </Container>
 
         <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Mint CONDO NFT</h2>
-          <h5>Condo unit NFTs can only be minted by condo estate developer</h5>
+          <h5>Condo unit NFT can only be minted by condo estate developer</h5>
           <form onSubmit= {(event) => {
             event.preventDefault();
             let address;
@@ -180,8 +180,8 @@ class Main extends Component {
         </Container>
 
         <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
-          <h2>Transfer CDTs</h2>
-          <h5>CDTs are governance token used for voting</h5>
+          <h2>Transfer CDT</h2>
+          <h5>CDT is the governance token used for voting</h5>
           <form onSubmit={(event) => {
             event.preventDefault();
             let address;
@@ -224,11 +224,12 @@ class Main extends Component {
           <h4>Workflow for proposal voting: View Proposal State >> Cast a Vote</h4>
           <h4>Voting Delay: {this.props.votingDelay} Block </h4>
           <h4>Voting Period: {this.props.votingPeriod} Block </h4>
+          <h4>Quorum: 66% (66% of total supply of CDT votes are required for a proposal to be succeeded)</h4>
         </Container>
 
         <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Delegate CDT</h2>
-          <h5>Delegate CDTs to yourself before voting to gain voting power extracted from your CDTs</h5>
+          <h5>Delegate CDT to yourself in advance to gain voting power extracted from your CDT</h5>
           <h5>Delegated Address: {this.props.condoTokenDelegates}</h5>
           <form onSubmit={(event) => {
             event.preventDefault();
@@ -244,7 +245,7 @@ class Main extends Component {
 
         <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
           <h2>Check Your Votes</h2>
-          <h5>Your Votes: {this.props.web3.utils.fromWei(this.props.condoTokenGetVotes, 'Ether')} CDTs</h5>
+          <h5>Your Votes: {this.props.web3.utils.fromWei(this.props.condoTokenGetVotes, 'Ether')} CDT</h5>
         </Container>
 
         <Container sx={{ alignItems: 'center', justifyContent: 'center', mt: 10, mb: 10, }}>
