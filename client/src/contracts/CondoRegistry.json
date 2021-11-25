@@ -22461,10 +22461,16 @@
       "links": {},
       "address": "0x9d7cd18bBAAC0Ea8265c3e5F5edED9a50786A451",
       "transactionHash": "0x5cdd6da39f6ae8f97e99e00d0d488d31f1535b8f1f40a6df654600d8e715d79b"
+    },
+    "1637863754141": {
+      "events": {},
+      "links": {},
+      "address": "0xF2AbfE994e065F62C57EF7c26e4CD629206307D0",
+      "transactionHash": "0x0a76ec89d49e592ca64cccbdf7cb747ab8f389b7cb69268c0e3bb2f1e4c28231"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-24T18:46:34.003Z",
+  "updatedAt": "2021-11-25T18:09:49.558Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "only condo estate developer (contract owner) will be able to mint NFTs; homeowners can only transfer",
