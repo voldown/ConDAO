@@ -54,21 +54,22 @@ Homeowners together share the responsibility of taking care of the condo as a co
     - Initial transfer: from estate developer to first-hand homeowner
     - Resale transfer: from previous homeowner to next homeowner
 - Governance voting
-    - check NFT for proposal making/voting/execution qualification
-    - vote for the proposal with `CDT`s weighted as voting power
+    - check `CONDO` NFT for proposal making/voting/execution validation
+    - vote for the proposal with `CDT` weighted as voting power
 
 ### High Level User Workflow
 
 - Estate developer
     1. deploys contracts
     2. `CDT`s are 100% preminted to estate developer's address
-    3. mints NFT to the homeowner of the sold unit
-    4. transfers `CDT`s to the homeowner of the sold unit
+    3. mints `CONDO` NFT to the homeowner of the sold unit
+    4. transfers `CDT` to the homeowner of the sold unit
 - Homeowner (condo unit owner)
-    1. receives the NFT and `CDT`s from estate developer
-    2. submits a proposal
-    3. votes for a proposal
-    4. executes a proposal
+    1. receives the NFT and `CDT` from estate developer
+    2. delegates CDTs as votes to themselves
+    3. submits a proposal
+    4. votes for a proposal
+    5. executes a proposal
 
 ### Tech Stack and Toolings
 
