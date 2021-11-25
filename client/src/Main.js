@@ -430,7 +430,7 @@ class Main extends Component {
               sx = {{ margin: [2, 2, 2, 2], padding: [1, 1, 1, 1] }}
               variant="outlined"
               type="submit"
-            >Propose</Button>
+            >Execute</Button>
           </form>
         </Container>
 

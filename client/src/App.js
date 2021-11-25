@@ -150,10 +150,12 @@ class App extends Component {
     await this.state.condoRegistry.methods.safeMint(address, tokenId, tokenURI)
       .send({ from: this.state.account })
         .on('transactionHash', (txHash) => {
-          window.alert(`Transaction Hash: ${txHash}`);
+          window.alert(`TRANSACTION HASH: ${txHash}`);
         })
         .on('receipt', (receipt) => {
-          window.alert(`CONDO NFT Minted Successfully!\nTransaction Hash: ${receipt.transactionHash}`);
+          let tokenId = receipt.events.MintedNFT.returnValues['0'];
+          let addressTo = receipt.events.Transfer.returnValues['1'];
+          window.alert(`CONDO NFT (TOKEN ID: ${tokenId}) HAS BEEN MINTED TO ${addressTo} SUCCESSFULLY! TRANSACTION HASH: ${receipt.transactionHash}`);
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -165,10 +167,12 @@ class App extends Component {
     await this.state.condoRegistry.methods.safeTransferFrom(this.state.account, addressTo, tokenId)
       .send({ from: this.state.account })
         .on('transactionHash', (txHash) => {
-          window.alert(`Transaction Hash: ${txHash}`);
+          window.alert(`TRANSACTION HASH: ${txHash}`);
         })
         .on('receipt', (receipt) => {
-          window.alert(`CONDO NFT transferred Successfully!\nTransaction Hash: ${receipt.transactionHash}`)
+          let addressTo = receipt.events.Transfer.returnValues['1'];
+          let tokenId = receipt.events.Transfer.returnValues['2'];
+          window.alert(`CONDO NFT (TOKEN ID: ${tokenId}) HAS BEEN TRANSFERRED TO ${addressTo} SUCCESSFULLY! TRANSACTION HASH: ${receipt.transactionHash}`)
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -180,10 +184,12 @@ class App extends Component {
     await this.state.condoToken.methods.transfer(address, amount)
       .send({ from: this.state.account })
         .on('transactionHash', (txHash) => {
-          window.alert(`Transaction Hash: ${txHash}`);
+          window.alert(`TRANSACTION HASH: ${txHash}`);
         })
         .on('receipt', (receipt) => {
-          window.alert(`CDTs transferred Successfully!\nTransaction Hash: ${receipt.transactionHash}`)
+          let addressTo = receipt.events.Transfer.returnValues['1'];
+          let transferAmount = receipt.events.Transfer.returnValues['2'];
+          window.alert(`${this.state.web3.utils.fromWei(transferAmount, 'Ether')} CDT HAS BEEN TRANSFERRED TO ${addressTo} SUCCESSFULLY! TRANSACTION HASH: ${receipt.transactionHash}`)
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -195,10 +201,10 @@ class App extends Component {
     await this.state.condoToken.methods.delegate(this.state.account)
       .send({ from: this.state.account })
         .on('transactionHash', (txHash) => {
-          window.alert(`Transaction Hash: ${txHash}`);
+          window.alert(`TRANSACTION HASH: ${txHash}`);
         })
         .on('receipt', (receipt) => {
-          window.alert(`CDTs delegated Successfully!\nTransaction Hash: ${receipt.transactionHash}`)
+          window.alert(`YOUR CDT HAS BEEN DELEGATED AS VOTES SUCCESSFULLY! TRANSACTION HASH: ${receipt.transactionHash}`)
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -210,12 +216,11 @@ class App extends Component {
     await this.state.condoGovernor.methods.propose(address, value, calldata, description)
       .send({ from: this.state.account })
         .on('transactionHash', (txHash) => {
-          window.alert(`Transaction Hash: ${txHash}`);
+          window.alert(`TRANSACTION HASH: ${txHash}`);
         })
         .on('receipt', (receipt) => {
           let proposalId = receipt.events.ProposalCreated.returnValues['0'];
-          console.log(proposalId);
-          window.alert(`Proposal Submitted Successfully!\nProposal ID: ${proposalId}\nTransaction Hash: ${receipt.transactionHash}`);
+          window.alert(`YOUR PROPOSAL HAS BEEN SUBMITTED SUCCESSFULLY! PROPOSAL ID: ${proposalId} TRANSACTION HASH: ${receipt.transactionHash}`);
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -247,7 +252,7 @@ class App extends Component {
           } else {
             proposalStateText = 'NULL'
           }
-          window.alert(`The Proposal is Currently ${proposalStateText}`);
+          window.alert(`THE PROPOSAL IS CURRENTLY ${proposalStateText}`);
           this.setState({ loading: false });
           window.location.reload(true);
         })  
@@ -274,7 +279,7 @@ class App extends Component {
           } else {
             supportLabel = 'NULL';
           }
-          window.alert(`Your ${supportLabel} Vote Cast Successfully for Proposal ID: ${proposalId}\nTransaction Hash: ${receipt.transactionHash}`);
+          window.alert(`YOUR ${supportLabel} VOTE HAS BEEN CAST SUCCESSFULLY FOR PROPOSAL ID: ${proposalId} TRANSACTION HASH: ${receipt.transactionHash}`);
           this.setState({ loading: false });
           window.location.reload(true);
         })
@@ -291,7 +296,7 @@ class App extends Component {
         .on('receipt', (receipt) => {
           let proposalId = receipt.events.ProposalExecuted.returnValues['0'];
           console.log(proposalId);
-          window.alert(`Proposal Executed Successfully!\nProposal ID: ${proposalId}\nTransaction Hash: ${receipt.transactionHash}`);
+          window.alert(`THE PROPOSAL HAS BEEN EXECUTED SUCCESSFULLY FOR PROPOSAL ID: ${proposalId} TRANSACTION HASH: ${receipt.transactionHash}`);
           this.setState({ loading: false });
           window.location.reload(true);
         })    
@@ -300,7 +305,7 @@ class App extends Component {
   render() {
     let content;
     if (this.state.loading) {
-      content = <h2 id="loader" className="center">Loading...</h2>;
+      content = <h2 id="loader" className="center">LOADING...</h2>;
     } else {
       content = <Main 
         web3={this.state.web3}
