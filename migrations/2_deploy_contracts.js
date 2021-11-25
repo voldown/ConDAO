@@ -3,11 +3,11 @@ const CondoToken = artifacts.require("./CondoToken.sol");
 const CondoGovernor = artifacts.require("./CondoGovernor.sol");
 
 module.exports = async function(deployer, network, accounts) {
-  // deploy CondoRegistry contract with a cappedSupply of 4
+  // deploy CondoRegistry contract with a maxSupply of 4 NFTs
   await deployer.deploy(CondoRegistry, "4");
   const condoRegistry = await CondoRegistry.deployed();
 
-  // deploy CondoToken contract with a cappedSupply of 1000
+  // deploy CondoToken contract with a maxTotalSupply of 1000 CDTs
   await deployer.deploy(CondoToken, "1000");
   const condoToken = await CondoToken.deployed();
 
@@ -17,10 +17,10 @@ module.exports = async function(deployer, network, accounts) {
      votingDelay: 1 block == 13.2 seconds
      votingPeriod: 45 block == 10 minutes
   */
-  /* local ganache-cli voting params configuration
+  /* local ganache-cli voting params configuration (requires sending dummy transaction to increase blockheight to proceed)
      votingDelay: 0 block 
-     votingPeriod: 4 block
+     votingPeriod: 5 block
   */
-  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 0, 4);
+  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 0, 5);
   const condoGovernor = await CondoGovernor.deployed();
 };
