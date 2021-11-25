@@ -79,10 +79,10 @@ Homeowners together share the responsibility of taking care of the condo as a co
 
 ---
 
-## Future Improvements & TBDs
+## Future Improvements
 
 - hardcoded demo application -> customizable real-world application
+- work on web2 backend to store proposal datas off-chain
 - work on tokenomics to improve rationality and incentive mechanism
 - access real-world datetime via Chainlink for security purpose
-- smart contract automation via OpenZeppelin Defender
-- use real-world price data of ETH/USD to automatically convert condo fees from eth to usd
+- use real-world price data of ETH/USD via Chainlink to convert fees from eth to usd
