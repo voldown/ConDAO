@@ -36,7 +36,10 @@ class Main extends Component {
             <Grid item xs={12}>
               <Item>
                 <h4>Condo Estate Developer Address: {this.props.condoRegistryDeveloper}</h4>
+                <h4>Condo Registry Contract Address: {this.props.condoRegistryAddress}</h4>
+                <h4>Condo Token Contract Address: {this.props.condoTokenAddress}</h4>
                 <img src={condo_whole} alt="condo_unit.jpeg" width="500px" />
+                <h4>Condo Governor Contract Address: {this.props.condoGovernorAddress}</h4>
                 <h4>Condo Treasury Address: {this.props.treasuryAddress}</h4>
                 <h4>Condo Treasury Balance: {this.props.web3.utils.fromWei(this.props.treasuryBalance, 'Ether')} ETH</h4>
               </Item>
