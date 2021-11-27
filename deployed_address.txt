@@ -1,0 +1,13 @@
+network: ropsten
+
+contract name: CondoRegistry
+contract address: 0x0107b81FA313D6883BBc3EE50bdbf989eFA39c30
+
+contract name: CondoToken
+contract address: 0x2EF4564f06E6C4425725a5B1884338c873558464
+
+contract name: CondoGovernor
+contract address: 0x082187A0Fa8d3703aE9bDba563524D50DF3829c2
+
+contract name: CondoTreasury
+contract address: 0xE14C2FdA1fA7299C94cDE54AEec0a40B037E286d
