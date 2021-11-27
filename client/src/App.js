@@ -58,7 +58,10 @@ class App extends Component {
       if (condoRegistryDeployedNetwork) {
         const condoRegistry = new web3.eth.Contract(
           CondoRegistry.abi,
-          condoRegistryDeployedNetwork && condoRegistryDeployedNetwork.address,
+          // local instance
+          // condoRegistryDeployedNetwork && condoRegistryDeployedNetwork.address,
+          // ropsten instance
+          condoRegistryDeployedNetwork && "0x0107b81FA313D6883BBc3EE50bdbf989eFA39c30",
         );
         this.setState({ condoRegistry });
         let condoRegistryBalance = await condoRegistry.methods.balanceOf(this.state.account).call();
@@ -93,7 +96,10 @@ class App extends Component {
       if (condoTokenDeployedNetwork) {
         const condoToken = new web3.eth.Contract(
           CondoToken.abi,
-          condoTokenDeployedNetwork && condoTokenDeployedNetwork.address,
+          // local instance
+          // condoTokenDeployedNetwork && condoTokenDeployedNetwork.address,
+          // ropsten instance
+          condoTokenDeployedNetwork && "0x2EF4564f06E6C4425725a5B1884338c873558464",
         );
         this.setState({ condoToken });
         let condoTokenBalance = await condoToken.methods.balanceOf(this.state.account).call();
@@ -115,7 +121,10 @@ class App extends Component {
       if (condoGovernorDeployedNetwork) {
         const condoGovernor = new web3.eth.Contract(
           CondoGovernor.abi,
-          condoGovernorDeployedNetwork && condoGovernorDeployedNetwork.address,
+          // local instance
+          // condoGovernorDeployedNetwork && condoGovernorDeployedNetwork.address,
+          // ropsten instance
+          condoGovernorDeployedNetwork && "0x082187A0Fa8d3703aE9bDba563524D50DF3829c2",
         );
         this.setState({ condoGovernor });
         let treasuryAddress = await condoGovernor.methods.treasury().call();

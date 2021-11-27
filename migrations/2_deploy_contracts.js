@@ -21,6 +21,9 @@ module.exports = async function(deployer, network, accounts) {
      votingDelay: 0 block 
      votingPeriod: 5 block
   */
-  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 0, 5);
+  // ropsten deployment
+  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 1, 45);  
+  // local deployment
+  // await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 0, 5);
   const condoGovernor = await CondoGovernor.deployed();
 };
