@@ -18,10 +18,13 @@
 
 ### Frontend Deployment
 - `cd client`
-- under the `/client` folder run `yarn install`
-- create `.env` under the `/client` folder and paste in `SKIP_PREFLIGHT_CHECK=true`
-- and `yarn start`
+- `yarn install`
+- `cat >> .env` and paste in `SKIP_PREFLIGHT_CHECK=true` and press CTRL+D to save and exit
+- `yarn start`
 - open `http://localhost:3000`
+- switch metamask network to GANACHE-CLI
+    - RPC URL: `http://127.0.0.1:8545`
+    - Chain ID: `1337`
 
 ### Screencast on Project Installation and Interaction
 []()
