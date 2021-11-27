@@ -19,11 +19,11 @@ module.exports = async function(deployer, network, accounts) {
   */
   /* local ganache-cli voting params configuration (requires sending dummy transaction to increase blockheight to proceed)
      votingDelay: 0 block 
-     votingPeriod: 5 block
+     votingPeriod: 4 block
   */
   // ropsten deployment
-  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 1, 45);  
+  // await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 1, 45);  
   // local deployment
-  // await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 0, 5);
+  await deployer.deploy(CondoGovernor, condoToken.address, condoRegistry.address, 0, 4);
   const condoGovernor = await CondoGovernor.deployed();
 };

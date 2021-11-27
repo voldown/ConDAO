@@ -22,6 +22,9 @@ class App extends Component {
       account: '0x0',
       condoRegistry: {},
       condoToken: {},
+      condoRegistryAddress: '0x0',
+      condoTokenAddress: '0x0',
+      condoGovernorAddress: '0x0',
       condoRegistryBalance: '0',
       condoTokenBalance: '0',
       condoTokenTotalSupply: '0',
@@ -59,11 +62,12 @@ class App extends Component {
         const condoRegistry = new web3.eth.Contract(
           CondoRegistry.abi,
           // local instance
-          // condoRegistryDeployedNetwork && condoRegistryDeployedNetwork.address,
+          condoRegistryDeployedNetwork && condoRegistryDeployedNetwork.address,
           // ropsten instance
-          condoRegistryDeployedNetwork && "0x0107b81FA313D6883BBc3EE50bdbf989eFA39c30",
+          // condoRegistryDeployedNetwork && "0x63105082888d826a030DEA8259B152547516e209",
         );
         this.setState({ condoRegistry });
+        let condoRegistryAddress = condoRegistry.options.address;
         let condoRegistryBalance = await condoRegistry.methods.balanceOf(this.state.account).call();
         let condoRegistryTotalRegistered = await condoRegistry.methods.totalSupply().call();
         let condoRegistryTotalUnits = await condoRegistry.methods.maxTotalSupply().call();
@@ -79,7 +83,8 @@ class App extends Component {
         for (let i=1; i<=condoRegistryTotalUnits; i++) {
           condoUnitRows.push(createCondoUnitRow(i, condoRegistryUnitOwners[i]));
         }
-        this.setState({ 
+        this.setState({
+          condoRegistryAddress: condoRegistryAddress.toString(), 
           condoRegistryBalance: condoRegistryBalance.toString(),
           condoRegistryTotalRegistered: condoRegistryTotalRegistered.toString(),
           condoRegistryDeveloper: condoRegistryDeveloper.toString(),
@@ -97,16 +102,18 @@ class App extends Component {
         const condoToken = new web3.eth.Contract(
           CondoToken.abi,
           // local instance
-          // condoTokenDeployedNetwork && condoTokenDeployedNetwork.address,
+          condoTokenDeployedNetwork && condoTokenDeployedNetwork.address,
           // ropsten instance
-          condoTokenDeployedNetwork && "0x2EF4564f06E6C4425725a5B1884338c873558464",
+          // condoTokenDeployedNetwork && "0xe72ee6c06CCf7ccFFe56203D7D206f4Bf891572b",
         );
         this.setState({ condoToken });
+        let condoTokenAddress = condoToken.options.address;
         let condoTokenBalance = await condoToken.methods.balanceOf(this.state.account).call();
         let condoTokenTotalSupply = await condoToken.methods.totalSupply().call();
         let condoTokenDelegates = await condoToken.methods.delegates(this.state.account).call();
         let condoTokenGetVotes = await condoToken.methods.getVotes(this.state.account).call();
         this.setState({ 
+          condoTokenAddress: condoTokenAddress.toString(),
           condoTokenBalance: condoTokenBalance.toString(),
           condoTokenDelegates: condoTokenDelegates.toString(),
           condoTokenGetVotes: condoTokenGetVotes.toString(),
@@ -122,16 +129,18 @@ class App extends Component {
         const condoGovernor = new web3.eth.Contract(
           CondoGovernor.abi,
           // local instance
-          // condoGovernorDeployedNetwork && condoGovernorDeployedNetwork.address,
+          condoGovernorDeployedNetwork && condoGovernorDeployedNetwork.address,
           // ropsten instance
-          condoGovernorDeployedNetwork && "0x082187A0Fa8d3703aE9bDba563524D50DF3829c2",
+          // condoGovernorDeployedNetwork && "0xCc8DDB6e27bC1e9b6Bb34586E3F7d34E147C7554",
         );
         this.setState({ condoGovernor });
+        let condoGovernorAddress = condoGovernor.options.address;
         let treasuryAddress = await condoGovernor.methods.treasury().call();
         let treasuryBalance = await condoGovernor.methods.treasuryBalance().call();
         let votingDelay = await condoGovernor.methods.votingDelay().call();
         let votingPeriod = await condoGovernor.methods.votingPeriod().call();
         this.setState({
+          condoGovernorAddress: condoGovernorAddress.toString(),
           treasuryAddress: treasuryAddress.toString(),
           treasuryBalance: treasuryBalance.toString(),
           votingDelay: votingDelay.toString(),
@@ -318,6 +327,9 @@ class App extends Component {
     } else {
       content = <Main 
         web3={this.state.web3}
+        condoRegistryAddress={this.state.condoRegistryAddress}
+        condoTokenAddress={this.state.condoTokenAddress}
+        condoGovernorAddress={this.state.condoGovernorAddress}
         condoRegistryBalance={this.state.condoRegistryBalance}
         condoTokenBalance={this.state.condoTokenBalance}
         condoTokenTotalSupply={this.state.condoTokenTotalSupply}
