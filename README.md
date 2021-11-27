@@ -8,6 +8,7 @@
 - Node.js >= v14.17
 - NPM >= 6.14
 - Yarn >= 1.22
+- Truffle & Ganache
 
 ### Smart Contract Deployment
 - run `npm install`
