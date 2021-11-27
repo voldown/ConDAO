@@ -61,7 +61,7 @@ class App extends Component {
           // local instance
           // condoRegistryDeployedNetwork && condoRegistryDeployedNetwork.address,
           // ropsten instance
-          condoRegistryDeployedNetwork && "0x0107b81FA313D6883BBc3EE50bdbf989eFA39c30",
+          condoRegistryDeployedNetwork && "0x63105082888d826a030DEA8259B152547516e209",
         );
         this.setState({ condoRegistry });
         let condoRegistryBalance = await condoRegistry.methods.balanceOf(this.state.account).call();
@@ -99,7 +99,7 @@ class App extends Component {
           // local instance
           // condoTokenDeployedNetwork && condoTokenDeployedNetwork.address,
           // ropsten instance
-          condoTokenDeployedNetwork && "0x2EF4564f06E6C4425725a5B1884338c873558464",
+          condoTokenDeployedNetwork && "0xe72ee6c06CCf7ccFFe56203D7D206f4Bf891572b",
         );
         this.setState({ condoToken });
         let condoTokenBalance = await condoToken.methods.balanceOf(this.state.account).call();
@@ -124,7 +124,7 @@ class App extends Component {
           // local instance
           // condoGovernorDeployedNetwork && condoGovernorDeployedNetwork.address,
           // ropsten instance
-          condoGovernorDeployedNetwork && "0x082187A0Fa8d3703aE9bDba563524D50DF3829c2",
+          condoGovernorDeployedNetwork && "0xCc8DDB6e27bC1e9b6Bb34586E3F7d34E147C7554",
         );
         this.setState({ condoGovernor });
         let treasuryAddress = await condoGovernor.methods.treasury().call();

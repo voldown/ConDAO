@@ -21898,6 +21898,12 @@
     "version": "0.8.2+commit.661d1103.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0x63105082888d826a030DEA8259B152547516e209",
+      "transactionHash": "0x97b81dd8885edd7cc63c69aa7c29cbed108d4d38905d38351f3a5e19ae0c5e30"
+    },
     "1636353648876": {
       "events": {},
       "links": {},
@@ -22470,7 +22476,7 @@
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-25T18:09:49.558Z",
+  "updatedAt": "2021-11-27T19:08:34.649Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "only condo estate developer (contract owner) will be able to mint NFTs; homeowners can only transfer",
