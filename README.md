@@ -1,7 +1,10 @@
 # ConDAO v0.1
 
-## Deployed Project Demo 
-[]()
+## Project Demo 
+### Ropsten Deployed React App
+[https://condao-project.vercel.app/](https://condao-project.vercel.app/)
+### Walkthrough Video
+[https://youtu.be/U6djzW6sOnQ](https://youtu.be/U6djzW6sOnQ)
 
 ## Project Installation
 ### Prerequisites
@@ -9,6 +12,7 @@
 - NPM >= 6.14
 - Yarn >= 1.22
 - Truffle & Ganache
+- `git checkout main`
 
 ### Smart Contract Deployment
 - run `npm install`
@@ -25,9 +29,6 @@
 - switch metamask network to GANACHE-CLI
     - RPC URL: `http://127.0.0.1:8545`
     - Chain ID: `1337`
-
-### Screencast on Project Installation and Interaction
-[]()
 
 ## Project Description
 
