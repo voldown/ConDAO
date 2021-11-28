@@ -4,13 +4,15 @@
 
 ### Ropsten Deployed React App
 [https://condao-project.vercel.app/](https://condao-project.vercel.app/)
+- due to the strict access control of the app, the demo app above can only be accessed via certain wallet addresses
+- please install this project locally following the instructions for interaction purpose
 
-### Walkthrough Video
+### Demo Walkthrough Video
 [https://youtu.be/U6djzW6sOnQ](https://youtu.be/U6djzW6sOnQ)
 
 ### Ethereum Address For Certification
-ENS: voldown.eth
-Address: 0x193150500c8FbA12383ea5a11C9082C9Fede1B1C
+- ens: voldown.eth
+- address: 0x193150500c8FbA12383ea5a11C9082C9Fede1B1C
 
 ---
 
@@ -20,25 +22,25 @@ Address: 0x193150500c8FbA12383ea5a11C9082C9Fede1B1C
 Homeowners together share the responsibility of taking care of the condo as a common property. However, often the case is that some of the homeowners would not like to agree with others in terms of certain aspects of the community proposal (e.g maintenance). Instead of relying on some sort of traditional property management intermediaries (e.g [HOA](https://en.wikipedia.org/wiki/Homeowner_association)), which tend to overcharge for fees and has not been proven to be effective or helpful as it is supposed to be, the DAO of Condo Property (ConDAO v0) is introduced here to offer alternative solutions.
 
 ### Key Features
-- Property tokenization
+- property tokenization
     - `CONDO` NFT: security token (ERC-721)
         - represents ownership of property 
     - `CDT`: governance token (ERC-20)
         - can be extracted as votes for governance voting 
-- Property ownership and token transfer
-    - Initial transfer: from estate developer to first-hand homeowner
-    - Resale transfer: from previous homeowner to next homeowner
-- Governance voting
+- property ownership and token transfer
+    - initial transfer: from estate developer to first-hand homeowner
+    - resale transfer: from previous homeowner to next homeowner
+- governance voting
     - check `CONDO` NFT for proposal making/voting/execution validation
     - vote for the proposal with `CDT` weighted as voting power
 
 ### High Level User Workflow
-- Estate developer
+- estate developer
     1. deploys contracts
     2. `CDT`s are 100% preminted to estate developer's address
     3. mints `CONDO` NFT to the homeowner of the sold unit
     4. transfers `CDT` to the homeowner of the sold unit
-- Homeowner (condo unit owner)
+- homeowner (condo unit owner)
     1. receives the corresponding `CONDO` NFT and certain amount of `CDT` from estate developer
     2. delegates CDTs as votes to themselves
     3. submits a proposal
@@ -61,10 +63,10 @@ Homeowners together share the responsibility of taking care of the condo as a co
 ## Project Installation
 
 ### Prerequisites
-- Node.js >= v14.17
-- NPM >= 6.14
-- Yarn >= 1.22
-- Truffle & Ganache
+- node.js >= v14.17
+- npm >= 6.14
+- yarn >= 1.22
+- truffle & ganache
 - `git checkout main`
 
 ### Smart Contract
