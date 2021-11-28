@@ -42,7 +42,7 @@ Homeowners together share the responsibility of taking care of the condo as a co
     4. transfers `CDT` to the homeowner of the sold unit
 - homeowner (condo unit owner)
     1. receives the corresponding `CONDO` NFT and certain amount of `CDT` from estate developer
-    2. delegates CDTs as votes to themselves
+    2. delegates `CDT` as votes to themselves
     3. submits a proposal
     4. votes for a proposal
     5. executes a proposal
@@ -51,12 +51,6 @@ Homeowners together share the responsibility of taking care of the condo as a co
 - smart contract development based on OpenZeppelin ERC-20, ERC-721 and Governor contract
 - using truffle framework for smart contract development and testing
 - using create-react-app and web3.js for frontend interaction
-
-### Directory Structure
-- `client`: react frontend of the project
-- `contracts`: smart contracts
-- `migrations`: migration files for deploying contracts
-- `test`: tests for smart contracts
 
 ---
 
@@ -89,7 +83,7 @@ Homeowners together share the responsibility of taking care of the condo as a co
 1. import wallet addresses from ganache-cli to metamask, switch network and preparation
     - accounts(0) is the estate developer's address (contract owner)
         - `CONDO` NFT can only be minted by the estate developer (contract owner)
-        - a total supply of 1000 CDT are preminted to the address
+        - a total supply of 1000 `CDT` are preminted to the address
     - accounts(1-4) can be used as unit owners' addresses
     - transfer 10 ETH fund to the condo treasury address as initial treasury funds
         - treasury funds can only be transferred via succeeded proposal execution 
@@ -112,6 +106,12 @@ Homeowners together share the responsibility of taking care of the condo as a co
 6. execute the proposal from a unit owner
     - `project description`, `address` and `value` should be exactly the same as the original input data of the proposal
     - if the proposal is executed successfully, ETH balance of unit#1 owner's account should increase by 0.5 ETH while the balance of treasury address should decrease by 0.5 ETH
+
+### Directory Structure
+- `client`: react frontend of the project
+- `contracts`: smart contracts
+- `migrations`: migration files for deploying contracts
+- `test`: tests for smart contracts
 
 ---
 
