@@ -89,7 +89,7 @@ Homeowners together share the responsibility of taking care of the condo as a co
 1. import wallet addresses from ganache-cli to metamask, switch network and preparation
     - accounts(0) is the estate developer's address (contract owner)
         - `CONDO` NFT can only be minted by the estate developer (contract owner)
-        - a total supply of 1000 CDT are preminted to the address
+        - a total supply of 1000 `CDT` are preminted to the address
     - accounts(1-4) can be used as unit owners' addresses
     - transfer 10 ETH fund to the condo treasury address as initial treasury funds
         - treasury funds can only be transferred via succeeded proposal execution 
