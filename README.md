@@ -4,7 +4,8 @@
 
 ### Ropsten Deployed React App
 [https://condao-project.vercel.app/](https://condao-project.vercel.app/)
-- due to the strict access control of the app, the demo app above can only be accessed via certain wallet addresses
+- please switch metamask network to ropsten testnet first and refresh the page
+- due to the strict access control, functions in the demo app above can only be accessed via certain wallet addresses
 - please install this project locally following the instructions for interaction purpose
 
 ### Demo Walkthrough Video
